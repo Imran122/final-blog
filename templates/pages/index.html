@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!--banner part and body part-->
+
+
+         <!-- add show adsence]-->
+         <div class="widget tags" style="margin-left: 200px;margin-bottom: 0px; width: 728px; height: 90;">
+            <a href="#"><img class="img-fluid" src="{% static 'img/banner2.jpg' %}" alt=""></a>
+           
+         </div>
+         <!-- add  show adsence-->
+
+
+<div class="container">
+   <div class="row">
+      <!-- Latest Posts -->
+      <main class="posts-listing col-lg-8">
+         <div class="blog_left_sidebar">
+            <article class="blog_style1">
+               <div class="blog_img">
+                  <img class="img-fluid" src="{% static 'img/home-blog/computer.jpg' %}" alt="">
+               </div>
+               <div class="blog_text">
+                  <div class="blog_text_inner">
+                     <a class="cat" href="#">Author</a>
+                     <a href="#">
+                        <h4>&quot;Hope is not a strategy, Do it now.&quot;</h4>
+                     </a>
+                     <p>Looking back and learning will enable you to move forward.The biggest risk is not taking any risk. In a world that’s changing really quickly,
+                        the only strategy that is guaranteed to fail, is not taking risks.
+                        It’s fine to celebrate success but it is more important to heed the lessons of failure.</p>
+
+                  </div>
+               </div>
+            </article>
+
+
+
+            <div class="row">
+               {% for obj in latest %}
+               <div class="col-md-6">
+                  <article class="blog_style1 small">
+                     <div class="blog_img">
+                        <img class="img-fluid" src="{{ obj.thumbnail.url }}" alt="">
+                     </div>
+                     <div class="blog_text">
+                        <div class="blog_text_inner">
+
+                           {% for cat in obj.categories.all %}
+                           <a href="#">{{ cat.title }} </a>
+                           {% endfor %}
+
+                           <a href="{{obj.get_absolute_url}}">
+                              <h4>{{ obj.title }}</h4>
+                           </a>
+                           <p>{{ obj.overview }}</p>
+                           <div class="date">
+                              <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                 {{ obj.timestamp | timesince }} ago</a>
+                              <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                                 {{ obj.comment_count }}</a>
+                           </div>
+                        </div>
+                     </div>
+                  </article>
+               </div>
+               {% endfor %}
+            </div>
+
+
+         </div>
+      </main>
+      <aside class="col-lg-4">
+
+
+         <!-- Widget [Search Bar Widget]-->
+         <!-- author -->
+         <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget author_widget">
+               <img class="author_img rounded-circle" src="{% static 'img/home-blog/author.png' %}" alt="">
+               <h4>Imran Hossain</h4>
+               <p>Senior Author</p>
+               
+               <div class="social_icon">
+                  <a href="#"><i class="fa fa-facebook"></i></a>
+                  <a href="#"><i class="fa fa-twitter"></i></a>
+                  <a href="#"><i class="fa fa-github"></i></a>
+                  <a href="#"><i class="fa fa-behance"></i></a>
+               </div>
+               <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you should have
+                  to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.</p>
+               <div class="br"></div>
+            </aside>
+         </div>
+         <!-- aythor-->
+
+         <!-- add show adsence]-->
+         <div class="widget tags">
+            <a href="#"><img class="img-fluid" src="{% static 'img/home-blog/add.jpg' %}" alt=""></a>
+            <div class="br"></div>
+         </div>
+         <!-- add  show adsence-->
+
+
+
+         <div class="widget search">
+            <header>
+               <h3 class="h6">Search Post By Title</h3>
+            </header>
+            <form action="{% url 'search' %}" class="search-form">
+               <div class="form-group">
+                  <input type="search" name="q" placeholder="What are you looking for?">
+                  <button type="submit" class="submit"><i class="icon-search"></i></button>
+               </div>
+            </form>
+         </div>
+
+
+
+
+
+
+
+         <!-- Widget [Latest Posts Widget]        -->
+         <div class="widget latest-posts">
+            <header>
+               <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+               {% for post in latest %}
+               <a href="{{ post.get_absolute_url }}">
+                  <div class="item d-flex align-items-center">
+                     <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
+                     </div>
+                     <div class="title"><strong>{{ post.title }}</strong>
+                        <div class="d-flex align-items-center">
+                           <div class="views"><i class="icon-eye"></i> {{ post.view_count }}</div>
+                           <div class="comments"><i class="icon-comment"></i>{{ post.comment_count }}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </a>
+               {% endfor %}
+            </div>
+         </div>
+
+
+         <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget post_category_widget">
+               <h4 class="widget_title">Post Catgories</h4>
+
+               <ul class="list cat-list">
+                  {% for cat in categorey_count %}
+                  <li>
+
+                     <a href="{% url "category_blog" cat.categories__id %}" class="d-flex justify-content-between">
+
+                        <p>{{ cat.categories__title }}</p>
+                        <p>{{ cat.categories__title__count }}</p>
+                     </a>
+
+                  </li>
+                  {%endfor %}
+               </ul>
+
+               <div class="br"></div>
+            </aside>
+         </div>
+
+
+      </aside>
+   </div>
+</div>
+
+
+{% include 'partials/galarey.html' %}
+
+{% endblock %}

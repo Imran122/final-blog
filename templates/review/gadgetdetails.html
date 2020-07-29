@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .post-body img{
+        width: 100%;
+    }
+</style>
+         <!-- add show adsence]-->
+         <div class="widget tags" style="margin-left: 200px;margin-bottom: 0px; width: 728px; height: 90;">
+          <a href="#"><img class="img-fluid" src="{% static 'img/banner2.jpg' %}" alt=""></a>
+         
+       </div>
+       <!-- add  show adsence-->
+
+
+       
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8">
+            <div class="container">
+                <div class="post-single">
+                    <div class="post-thumbnail"><img src="{{ gadgetpost.thumbnail.url }}" alt="..." class="img-fluid"></div>
+                    <div class="post-details">
+                        <div class="post-meta d-flex justify-content-between">
+                            
+                            <div class="category">
+                              {% for cat in gadgetpost.gadgetcategories.all %}
+                                <a href="#">{{cat.title}}</a>
+                                
+                                {% endfor %}
+                            </div>
+                            
+                        </div>
+                        <h1>{{ gadgetpost.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                        <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#"
+                                class="author d-flex align-items-center flex-wrap">
+                                <div class="avatar"><img src="{{ gadgetpost.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
+                                <div class="title"><span>{{ gadgetpost.author.user.username }}</span></div>
+                            </a>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <div class="date"><i class="icon-clock"></i>{{gadgetpost.timestamp | timesince }} ago</div>
+                                <div class="views"><i class="icon-eye"></i> {{ gadgetpost.view_count }}</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ gadgetpost.comment_count }}</div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                         
+                            {{gadgetpost.content | safe }}    
+
+
+                        </div>
+
+                        <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+                            
+                            {% if gadgetpost.previous_post %}
+                            <a href="{{ gadgetpost.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                                <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                               
+                                <div class="text"><strong class="text-primary">Previous Post </strong>
+                                    <h6>{{gadgetpost.previous_post.title}}</h6>
+                                </div>
+                               
+                            </a>
+                            {% endif %}
+                            {% if gadgetpost.next_post %}
+                            <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                                
+                                <div class="text"><strong class="text-primary">Next Post </strong>
+                                    <h6>{{gadgetpost.next_post.title}}</h6>
+                                </div>
+                                <div class="icon next"><i class="fa fa-angle-right"> </i></div>
+                            </a>
+                            {% endif %}
+                        </div>
+
+
+                        <!-- disqus comment system-->
+                        <div class="post-comments">
+                            <header>
+                                <h3 class="h6">Post Comments<span class="no-of-comments"></span></h3>
+                              
+                                <a href="#">View Comments</a>
+                              
+
+                            </header>
+                  
+                            <div class="comment">
+     
+                              {% include 'review/comment.html' with url=object.slug %}
+                            </div>
+                        </div>
+      <!-- disqus comment system-->
+                    </div>
+                </div>
+            </div>
+        </main>
+        <aside class="col-lg-4">
+
+
+
+        <!-- add show adsence]-->
+          <div class="widget tags">
+            <a href="#"><img class="img-fluid" src="{% static 'img/home-blog/add.jpg' %}" alt=""></a>
+            <div class="br"></div>
+         </div>
+         <!-- add  show adsence-->
+         
+            <!-- Widget [Search Bar Widget]-->
+        <!-- Widget [Search Bar Widget]-->
+        <div class="widget search">
+            <header>
+              <h3 class="h6">Search Post By Title</h3>
+            </header>
+            <form action="{% url 'gadgetsearch' %}" class="search-form">
+              <div class="form-group">
+                <input type="search" name="q" placeholder="What are you looking for?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+              {% for post in most_recent %}
+              <a href="{{post.get_absolute_url}}">
+              <div class="item d-flex align-items-center">
+                  <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
+                  <div class="title"><strong>{{ post.title }}</strong>
+                    <div class="d-flex align-items-center">
+                    
+                      <div class="views"><i class="icon-eye"></i> {{ post.view_count }}</div>
+                   
+                      <div class="comments"><i class="icon-comment"></i>{{post.comment_count}}</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+                  {% endfor %}
+                  
+              </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget post_category_widget">
+               <h4 class="widget_title">Post Catgories</h4>
+
+               <ul class="list cat-list">
+                  {% for cat in gadgetcategorey_count %}
+                  <li>
+
+                     <a href="{% url "gadgetcategorey_gadgetpost" cat.gadgetcategories__id %}" class="d-flex justify-content-between">
+
+                        <p>{{ cat.gadgetcategories__title }}</p>
+                        <p>{{ cat.gadgetcategories__title__count }}</p>
+                     </a>
+
+                  </li>
+                  {% endfor %}
+               </ul>
+
+               <div class="br"></div>
+            </aside>
+         </div>
+          
+
+         
+        </aside>
+    </div>
+</div>
+
+
+
+
+<script id="dsq-count-scr" src="//itech-verse-1.disqus.com/count.js" async></script>
+{% endblock %}

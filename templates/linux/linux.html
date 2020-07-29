@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!--banner part and body part-->
+
+
+         <!-- add show adsence]-->
+         <div class="widget tags" style="margin-left: 200px;margin-bottom: 0px; width: 728px; height: 90;">
+            <a href="#"><img class="img-fluid" src="{% static 'img/banner2.jpg' %}" alt=""></a>
+           
+         </div>
+         <!-- add  show adsence-->
+
+
+<div class="container">
+   <div class="row">
+      <!-- Latest Posts -->
+      <main class="posts-listing col-lg-8">
+         <div class="blog_left_sidebar">
+
+
+
+
+            <div class="row">
+               {% for obj in queryset2 %}
+               <div class="col-md-6">
+                  <article class="blog_style1 small">
+                     <div class="blog_img">
+                        <img class="img-fluid" src="{{ obj.thumbnail.url }}" alt="">
+                     </div>
+                     <div class="blog_text">
+                        <div class="blog_text_inner">
+
+                           {% for cat in obj.linuxcategories.all %}
+                           <a href="#">{{ cat.title }} </a>
+                           {% endfor %}
+
+                           <a href="{{obj.get_absolute_url}}">
+                              <h4>{{ obj.title }}</h4>
+                           </a>
+                           <p>{{ obj.overview }}</p>
+                           <div class="date">
+                              <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                 {{ obj.timestamp | timesince }} ago</a>
+                              <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                                 {{ obj.comment_count }}</a>
+                           </div>
+                        </div>
+                     </div>
+                  </article>
+               </div>
+               {% endfor %}
+            </div>
+
+
+         </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-template d-flex justify-content-center">
+                        {% if queryset2.has_previous %}
+                        <li class="page-item"><a href="?{{ page_request_var }}= {{ queryset2.previous_page_number }}"
+                                class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                        {% endif %}
+
+                        {% for i in queryset2.paginator.page_range %}
+                        {% if queryset1.number == i %}
+                        <li class="page-item active"><a href="?page={{ i }}" class="page-link active">{{ i }}</a></li>
+
+                        {% else %}
+                        <li class="page-item "><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if queryset2.has_next %}
+                        <li class="page-item"><a href="?{{ page_request_var }}= {{ queryset2.next_page_number }}"
+                                class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+
+
+      </main>
+      <aside class="col-lg-4">
+
+
+         <!-- Widget [Search Bar Widget]-->
+
+
+         <!-- add show adsence]-->
+         <div class="widget tags">
+            <a href="#"><img class="img-fluid" src="{% static 'img/home-blog/add.jpg' %}" alt=""></a>
+            <div class="br"></div>
+         </div>
+         <!-- add  show adsence-->
+
+
+
+         <div class="widget search">
+            <header>
+               <h3 class="h6">Search Post By Title</h3>
+            </header>
+            <form action="{% url 'linuxsearch' %}" class="search-form">
+               <div class="form-group">
+                  <input type="search" name="q" placeholder="What are you looking for?">
+                  <button type="submit" class="submit"><i class="icon-search"></i></button>
+               </div>
+            </form>
+         </div>
+
+
+
+
+
+
+
+         <!-- Widget [Latest Posts Widget]        -->
+         <div class="widget latest-posts">
+            <header>
+               <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+               {% for post in most_recent %}
+               <a href="{{ post.get_absolute_url }}">
+                  <div class="item d-flex align-items-center">
+                     <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
+                     </div>
+                     <div class="title"><strong>{{ post.title }}</strong>
+                        <div class="d-flex align-items-center">
+                           <div class="views"><i class="icon-eye"></i> {{ post.view_count }}</div>
+                           <div class="comments"><i class="icon-comment"></i>{{ post.comment_count }}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </a>
+               {% endfor %}
+            </div>
+         </div>
+
+
+         <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget post_category_widget">
+               <h4 class="widget_title">Post Catgories</h4>
+
+               <ul class="list cat-list">
+                  {% for cat in linuxcategorey_count %}
+                  <li>
+
+                     <a href="{% url "linuxcategorey_linuxpost" cat.linuxcategories__id %}" class="d-flex justify-content-between">
+
+                        <p>{{ cat.linuxcategories__title }}</p>
+                        <p>{{ cat.linuxcategories__title__count }}</p>
+                     </a>
+
+                  </li>
+                  {% endfor %}
+               </ul>
+
+               <div class="br"></div>
+            </aside>
+         </div>
+
+
+      </aside>
+   </div>
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

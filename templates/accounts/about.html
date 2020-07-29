@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url({% static 'img/bg-02.jpg' %});">
+                <span class="login100-form-title-1">
+                    ABOUT ME
+                </span>
+            </div>
+
+            <div>
+               
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget author_widget">
+                       <img class="author_img rounded-circle" src="{% static 'img/home-blog/author.png' %}" alt="">
+                       <h4>Imran Hossain</h4>
+                       <p>Full Stack Developer</p>
+                       
+                       <div class="social_icon">
+                          <a href="#"><i class="fa fa-facebook"></i></a>
+                          <a href="#"><i class="fa fa-twitter"></i></a>
+                          <a href="#"><i class="fa fa-github"></i></a>
+                          <a href="#"><i class="fa fa-behance"></i></a>
+                       </div>
+
+                       <p style="text-align: justify; color:rgb(71, 69, 69);">When you are your own boss and doing hard work continuously but still there is no result coming out then it's sometimes hard to stay motivated. Generally, it happens with everyone to stay with self-motivate constantly, and as a developer, it can be harder. 
+                           But keeping yourself on the task with all hope and try best is the most precious strategy.</p>
+                       <div class="br"></div>
+
+                    </aside>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

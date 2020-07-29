@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-form-title" style="background-image: url({% static 'img/bg-02.jpg' %});">
+                        <span class="login100-form-title-1">
+                            Contact Us
+                        </span>
+                    </div>
+                    {% include 'partials/alerts.html' %}
+                    <form class="login100-form validate-form" action="#"  method="post">
+                        {% csrf_token %}
+                        {{ forms }}
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                            
+                            <label class="label-input100" for="name">Username</label>
+                            <input class="input100" type="text" name="name" placeholder="Enter username">
+                            <span class="focus-input100"></span>
+                        </div>
+        
+                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Email requreied">
+                            <span class="label-input100">Email</span>
+                            <input class="input100" type="email" name="email" placeholder="Enter Email">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Phone">
+                            <span class="label-input100">Phone</span>
+                            <input class="input100" type="text" name="phone" placeholder="Enter phone">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-18" >
+                            <span class="label-input100">Address</span>
+                            <input class="input100" type="text" name="address" placeholder="Enter Address">
+                            <span class="focus-input100"></span>
+                        </div>
+                        
+                        <!--text area -->
+                        <label class="label-input100"> Messages </label>
+                        <div class="wrap-input100 validate-input m-b-18" >
+                            
+                        <textarea id="msg" name="msg" rows="6" cols="50">
+  
+                        </textarea>
+                    </div>
+                        <!--text area -->
+
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" type="submit">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="col-lg-4" style="text-align: center; margin-top: 120px;">
+        <div class="contact-details">
+            <h3 style="color: rgb(37, 32, 32);"> Contact Address</h3>
+            <br>
+            <p>257/3, west Nakhala Para, Dhaka, Bangladesh</p>
+            <p>Phone: (+880) 1682765544</p>
+            <p>Email: <a href="#">mdimranhossain0066@gmail.com</a></p>
+            <ul class="social-menu">
+                <li class="list-inline-item"><a href="#"><i class="fa fa-github"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                
+                
+            </ul>
+
+        </div>
+        <div >
+            <br>
+            <h3 style="color: rgb(37, 32, 32);">Advertise / Sponsorship</h3>
+            <p style="text-align: justify; color:rgb(71, 69, 69);" ><small>If you formed a new busines or site or have a new items,products to sell that
+                 you want to like advertise on <b>Itech-Verse</b>,
+                Plesase send information by E-mail or Contact With us.</small></p>
+                <br>
+            <h5 style="color: rgb(71, 69, 69);">Please Contact us directly at: mdimranhossain0066@gmail.com</h5>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+{% endblock %}
